@@ -1,0 +1,7 @@
+Origin: MCC OS
+Label: MCC OS Repository
+Codename: stable
+Architectures: amd64 arm64
+Components: main
+Description: Official Package Repository for MCC OS
+SignWith: default
