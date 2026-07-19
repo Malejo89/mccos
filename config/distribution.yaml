@@ -1,0 +1,8 @@
+distribution:
+  name: MCC OS
+  version: 0.1.0-dev
+  base: Debian Stable
+desktop:
+  default: KDE Plasma
+edition:
+  default: developer
