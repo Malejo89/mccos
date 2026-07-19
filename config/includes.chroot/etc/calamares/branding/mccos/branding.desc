@@ -1,0 +1,30 @@
+---
+componentName:  mccos
+welcomeStyleCalamares:   false
+welcomeExpandingLogo:   true
+windowExpanding:    normal
+windowSize: 800px,520px
+windowPlacement: center
+
+strings:
+    productName:         MCC OS
+    shortProductName:    MCC OS
+    version:             0.1.0-dev
+    shortVersion:        0.1.0
+    versionedName:       MCC OS 0.1.0-dev
+    shortVersionedName:  MCC OS 0.1.0
+    bootloaderEntryName: MCC OS
+
+images:
+    productLogo:         "mccos-logo.png"
+    productIcon:         "mccos-logo.png"
+    productWelcome:      "languages.png"
+
+style:
+   SidebarBackground:    "#2c3133"
+   SidebarText:          "#FFFFFF"
+   SidebarTextCurrent:   "#292F34"
+   SidebarBackgroundCurrent: "#D35400"
+
+slideshow:               "show.qml"
+slideshowAPI: 2
