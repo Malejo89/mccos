@@ -1,0 +1,37 @@
+#!/bin/sh
+
+set -e
+
+echo "Running 0600-docker-ce.hook.chroot: Installing Docker CE..."
+
+export DEBIAN_FRONTEND=noninteractive
+
+# Install prerequisites
+apt-get update
+apt-get install -y ca-certificates curl gnupg lsb-release
+
+# Add Docker's official GPG key
+mkdir -p /etc/apt/keyrings
+curl -fsSL https://download.docker.com/linux/debian/gpg | gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+
+# Set up the repository
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/debian \
+  $(lsb_release -cs) stable" > /etc/apt/sources.list.d/docker.list
+
+# Install Docker Engine, containerd, and Docker Compose
+apt-get update
+apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+
+# Enable Docker service
+systemctl enable docker
+systemctl enable containerd
+
+# Add future default live user to docker group (if 'user' exists, usually standard for live-build)
+# In Debian live, the default user is 'user'. We ensure the group exists and add it.
+groupadd -f docker
+if id -u user >/dev/null 2>&1; then
+    usermod -aG docker user
+fi
+
+echo "Docker CE hook completed."
