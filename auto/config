@@ -5,7 +5,8 @@ set -e
 lb config noauto \
     --mode debian \
     --distribution stable \
-    --architecture amd64 \
+    --architecture arm64 \
+    --bootloader grub-efi \
     --archive-areas "main contrib non-free non-free-firmware" \
     --iso-application "MCC OS" \
     --iso-publisher "MCC OS Engineering" \

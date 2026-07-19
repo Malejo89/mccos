@@ -17,7 +17,12 @@ build:
 	@docker build -t mcc-os-dev -f .devcontainer/Dockerfile .
 	@echo "Running lb config inside container..."
 	@docker run --rm --privileged -v $(PWD):/workspace mcc-os-dev bash -c "lb config && lb build"
-	@echo "Build complete. Check the workspace for the generated ISO."
+	@if ls live-image-arm64.hybrid.iso 1> /dev/null 2>&1; then \
+		mv live-image-arm64.hybrid.iso /Users/malejo/Downloads/mccos-arm64.iso; \
+		echo "Build complete. ISO moved to /Users/malejo/Downloads/mccos-arm64.iso"; \
+	else \
+		echo "Build complete but ISO not found."; \
+	fi
 
 environment-check:
 	@bash scripts/environment-check.sh
