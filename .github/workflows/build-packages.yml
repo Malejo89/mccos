@@ -1,0 +1,43 @@
+name: Build MCC Packages
+
+on:
+  push:
+    paths:
+      - 'packages/**'
+      - 'platform/**'
+      - '.github/workflows/build-packages.yml'
+  workflow_dispatch:
+
+jobs:
+  build-deb:
+    runs-on: ubuntu-latest
+    container:
+      image: debian:bookworm
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Install Build Dependencies
+        run: |
+          apt-get update
+          apt-get install -y dpkg-dev debhelper dh-python python3-all
+
+      - name: Build Packages
+        run: |
+          mkdir -p build-artifacts
+          for pkg_dir in packages/*; do
+            if [ -d "$pkg_dir/debian" ]; then
+              echo "Building $pkg_dir..."
+              cd "$pkg_dir"
+              # Ensure dependencies are installed (mocked here, ideally use mk-build-deps)
+              dpkg-buildpackage -us -uc -b
+              cd ../..
+              mv packages/*.deb build-artifacts/ || true
+            fi
+          done
+
+      - name: Upload Package Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: mcc-os-packages
+          path: build-artifacts/*.deb
