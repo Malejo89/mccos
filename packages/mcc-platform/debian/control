@@ -1,0 +1,13 @@
+Source: mcc-platform
+Section: python
+Priority: optional
+Maintainer: MCC OS Engineering <eng@mcc-os.org>
+Build-Depends: debhelper (>= 11), dh-python, python3-all
+Standards-Version: 4.1.4
+
+Package: python3-mcc-platform
+Architecture: all
+Depends: ${misc:Depends}, ${python3:Depends}, python3-apt, python3-dbus
+Description: MCC OS Platform APIs
+ Internal API library exposing hardware, updates, packages, driver
+ detection, and AI interactions to MCC graphical applications.
