@@ -1,0 +1,19 @@
+#!/bin/sh
+
+set -e
+
+lb config noauto \
+    --mode debian \
+    --distribution stable \
+    --architecture amd64 \
+    --archive-areas "main contrib non-free non-free-firmware" \
+    --iso-application "MCC OS" \
+    --iso-publisher "MCC OS Engineering" \
+    --iso-volume "MCC OS 0.1.0-dev" \
+    --linux-packages "linux-image linux-headers" \
+    --memtest none \
+    --system normal \
+    --apt-recommends false \
+    --apt-indices false \
+    --bootappend-live "boot=live components locales=en_US.UTF-8 quiet splash" \
+    "${@}"

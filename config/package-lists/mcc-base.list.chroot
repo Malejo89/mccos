@@ -1,0 +1,43 @@
+# Core System
+systemd
+systemd-sysv
+dbus
+sudo
+bash-completion
+locales
+tzdata
+console-setup
+keyboard-configuration
+
+# Firmware
+firmware-linux
+firmware-linux-free
+firmware-linux-nonfree
+firmware-iwlwifi
+firmware-realtek
+firmware-atheros
+firmware-brcm80211
+intel-microcode
+amd-microcode
+
+# Networking
+network-manager
+iproute2
+iputils-ping
+curl
+wget
+
+# Disk and Filesystem
+btrfs-progs
+e2fsprogs
+dosfstools
+ntfs-3g
+xfsprogs
+
+# Utilities
+vim
+nano
+less
+htop
+tmux
+git
