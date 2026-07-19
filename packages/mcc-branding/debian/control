@@ -1,0 +1,13 @@
+Source: mcc-branding
+Section: graphics
+Priority: optional
+Maintainer: MCC OS Engineering <eng@mcc-os.org>
+Build-Depends: debhelper (>= 11)
+Standards-Version: 4.1.4
+
+Package: mcc-branding
+Architecture: all
+Depends: ${misc:Depends}, plymouth-themes, sddm-theme-breeze
+Description: MCC OS Branding Assets
+ Contains the logos, Plymouth splash screens, wallpapers, and SDDM
+ configuration specific to the MCC OS identity.

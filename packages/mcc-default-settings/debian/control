@@ -1,0 +1,13 @@
+Source: mcc-default-settings
+Section: admin
+Priority: optional
+Maintainer: MCC OS Engineering <eng@mcc-os.org>
+Build-Depends: debhelper (>= 11)
+Standards-Version: 4.1.4
+
+Package: mcc-default-settings
+Architecture: all
+Depends: ${misc:Depends}
+Description: MCC OS Default Settings
+ Installs the system-wide default configuration for bash, shell aliases,
+ KDE Plasma defaults, and accessibility presets for MCC OS.

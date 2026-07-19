@@ -1,0 +1,13 @@
+Source: mcc-hardware-detection
+Section: utils
+Priority: optional
+Maintainer: MCC OS Engineering <eng@mcc-os.org>
+Build-Depends: debhelper (>= 11)
+Standards-Version: 4.1.4
+
+Package: mcc-hardware-detection
+Architecture: all
+Depends: ${misc:Depends}, pciutils, usbutils, lshw, inxi
+Description: MCC OS Hardware Detection
+ Core package for detecting CPU, GPU, Network, and Virtualization
+ features to power the MCC Driver Manager and Welcome apps.
