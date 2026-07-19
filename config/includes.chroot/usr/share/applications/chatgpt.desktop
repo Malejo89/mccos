@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Name=ChatGPT
+Comment=ChatGPT Progressive Web App
+Exec=xdg-open https://chatgpt.com
+Icon=browser
+Terminal=false
+Type=Application
+Categories=Network;WebBrowser;AI;
