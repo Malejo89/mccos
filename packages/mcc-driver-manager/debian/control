@@ -1,0 +1,13 @@
+Source: mcc-driver-manager
+Section: admin
+Priority: optional
+Maintainer: MCC OS Engineering <eng@mcc-os.org>
+Build-Depends: debhelper (>= 11)
+Standards-Version: 4.1.4
+
+Package: mcc-driver-manager
+Architecture: all
+Depends: ${misc:Depends}, python3, python3-pyqt6, python3-mcc-platform
+Description: MCC OS Driver Manager
+ Detects and installs proprietary drivers, firmware updates, Intel/AMD
+ microcode, and monitors Secure Boot/TPM status.
