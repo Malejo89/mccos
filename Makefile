@@ -16,7 +16,7 @@ build:
 	fi
 	@docker build -t mcc-os-dev -f .devcontainer/Dockerfile .
 	@echo "Running lb config inside container..."
-	@docker run --rm --privileged -v $(PWD):/workspace mcc-os-dev bash -c "sudo lb config && sudo lb build"
+	@docker run --rm --privileged -v $(PWD):/workspace mcc-os-dev bash -c "mkdir -p /build && cp -a /workspace/* /build/ && cd /build && sudo lb config && sudo lb build && cp *.iso /workspace/ || true"
 	@if ls live-image-arm64.hybrid.iso 1> /dev/null 2>&1; then \
 		mv live-image-arm64.hybrid.iso /Users/malejo/Downloads/mccos-arm64.iso; \
 		echo "Build complete. ISO moved to /Users/malejo/Downloads/mccos-arm64.iso"; \
