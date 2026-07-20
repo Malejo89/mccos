@@ -17,8 +17,7 @@ firmware-iwlwifi
 firmware-realtek
 firmware-atheros
 firmware-brcm80211
-intel-microcode [amd64 i386]
-amd-microcode [amd64 i386]
+
 
 # Networking
 network-manager
