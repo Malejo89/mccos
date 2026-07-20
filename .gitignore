@@ -1,0 +1,30 @@
+# live-build build directories
+.build/
+chroot/
+cache/
+binary/
+source/
+local/
+
+# build logs
+build.log
+*.log
+
+# artifacts
+*.iso
+*.img
+*.tar.gz
+*.tar.xz
+*.squashfs
+
+# live-build auto-generated config state files
+config/binary
+config/bootstrap
+config/chroot
+config/common
+config/source
+
+# live-build auto-generated default hooks
+config/hooks/live/0010-disable-kexec-tools.hook.chroot
+config/hooks/live/0050-disable-sysvinit-tmpfs.hook.chroot
+config/hooks/normal/
