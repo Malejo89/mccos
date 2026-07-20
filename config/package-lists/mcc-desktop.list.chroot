@@ -1,6 +1,6 @@
 # Desktop Environment
 kde-plasma-desktop
-plasma-workspace-wayland
+plasma-workspace
 sddm
 
 # Display Server
@@ -23,11 +23,11 @@ fonts-roboto
 konsole
 dolphin
 kate
-firefox
+firefox-esr
 ark
 gwenview
 okular
-spectacle
+kde-spectacle
 
 # Accessibility
 orca
