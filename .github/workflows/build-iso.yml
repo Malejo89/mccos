@@ -34,20 +34,20 @@ jobs:
 
       - name: Rename ISO
         run: |
-          if [ -f live-image-amd64.hybrid.iso ]; then
-            mv live-image-amd64.hybrid.iso mccos-amd64.iso
+          if [ -f live-image-arm64.hybrid.iso ]; then
+            mv live-image-arm64.hybrid.iso mccos-arm64.iso
           fi
 
       - name: Upload ISO Artifact
         uses: actions/upload-artifact@v4
         with:
           name: mccos-iso
-          path: mccos-amd64.iso
+          path: mccos-arm64.iso
 
       - name: Create GitHub Release
         if: startsWith(github.ref, 'refs/tags/')
         uses: softprops/action-gh-release@v1
         with:
-          files: mccos-amd64.iso
+          files: mccos-arm64.iso
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
