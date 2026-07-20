@@ -8,7 +8,7 @@ on:
 
 jobs:
   build-iso:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04-arm64
     permissions:
       contents: write
     steps:
@@ -17,9 +17,8 @@ jobs:
 
       - name: Install build dependencies
         run: |
-          sudo docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
           sudo apt-get update
-          sudo apt-get install -y live-build debootstrap qemu-user-static binfmt-support
+          sudo apt-get install -y live-build debootstrap
 
       - name: Inject Custom Packages (Simulated)
         run: |
@@ -30,8 +29,7 @@ jobs:
 
       - name: Build ISO
         run: |
-          sudo lb config --bootstrap-qemu-arch arm64 --bootstrap-qemu-static /usr/bin/qemu-aarch64-static
-          echo 'LB_DEBOOTSTRAP_OPTIONS="--variant=minbase"' | sudo tee -a config/bootstrap
+          sudo lb config
           sudo lb build
 
       - name: Rename ISO
