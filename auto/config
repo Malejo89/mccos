@@ -17,4 +17,5 @@ lb config noauto \
     --apt-recommends false \
     --apt-indices false \
     --bootappend-live "boot=live components locales=en_US.UTF-8 quiet splash" \
+    --security false \
     "${@}"
