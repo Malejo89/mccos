@@ -29,7 +29,7 @@ jobs:
 
       - name: Build ISO
         run: |
-          sudo lb config
+          sudo lb config --bootstrap qemu-debootstrap
           sudo lb build
 
       - name: Rename ISO
