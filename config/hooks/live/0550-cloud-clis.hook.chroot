@@ -27,8 +27,8 @@ echo "Installing Azure CLI..."
 mkdir -p /etc/apt/keyrings
 curl -sLS https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor -o /etc/apt/keyrings/microsoft.gpg
 chmod go+r /etc/apt/keyrings/microsoft.gpg
-# Fallback to bookworm if lsb_release fails in chroot
-AZ_DIST=$(lsb_release -cs || echo "bookworm")
+# Force to bookworm if trixie or anything else, as trixie isn't in MS repos yet
+AZ_DIST="bookworm"
 echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/microsoft.gpg] https://packages.microsoft.com/repos/azure-cli/ $AZ_DIST main" | tee /etc/apt/sources.list.d/azure-cli.list
 apt-get update
 apt-get install -y azure-cli
