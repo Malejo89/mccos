@@ -27,12 +27,15 @@ echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.co
 apt-get update
 apt-get install -y nodejs
 
-# 3. Install Bruno (Official Repository)
+# 3. Install Bruno (Official DEB for ARM64)
 echo "Installing Bruno..."
-mkdir -p /etc/apt/keyrings
-curl -fsSL https://bruno.downloads.s3.amazonaws.com/bruno.gpg | gpg --dearmor -o /etc/apt/keyrings/bruno.gpg
-echo "deb [signed-by=/etc/apt/keyrings/bruno.gpg] http://debian.usebruno.com/ bruno main" > /etc/apt/sources.list.d/bruno.list
-apt-get update
-apt-get install -y bruno
+BRUNO_DEB_URL=$(curl -s https://api.github.com/repos/usebruno/bruno/releases/latest | grep "browser_download_url.*_arm64_linux.deb" | cut -d '"' -f 4 | head -n 1)
+if [ -n "$BRUNO_DEB_URL" ]; then
+    wget -O bruno_arm64.deb "$BRUNO_DEB_URL"
+    apt-get install -y ./bruno_arm64.deb
+    rm -f bruno_arm64.deb
+else
+    echo "Warning: Could not find Bruno ARM64 DEB URL."
+fi
 
 echo "Developer tools hook completed."
