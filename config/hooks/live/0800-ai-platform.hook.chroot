@@ -6,8 +6,10 @@ echo "Running 0800-ai-platform.hook.chroot: Installing AI Platform..."
 
 export DEBIAN_FRONTEND=noninteractive
 
-# 1. Install Ollama
+# 1. Install Ollama (requires zstd)
 echo "Installing Ollama..."
+apt-get update
+apt-get install -y zstd
 curl -fsSL https://ollama.com/install.sh | sh
 
 # 2. Enable Open WebUI service
