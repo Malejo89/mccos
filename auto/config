@@ -6,6 +6,7 @@ lb config noauto \
     --mode debian \
     --distribution stable \
     --architecture arm64 \
+    --linux-flavours arm64 \
     --bootloader grub-efi \
     --archive-areas "main contrib non-free non-free-firmware" \
     --iso-application "MCC OS" \
@@ -13,9 +14,11 @@ lb config noauto \
     --iso-volume "MCC OS 0.1.0-dev" \
     --linux-packages "linux-image linux-headers" \
     --memtest none \
+    --initramfs live-boot \
     --system normal \
     --apt-recommends false \
     --apt-indices false \
     --bootappend-live "boot=live components locales=en_US.UTF-8 quiet splash" \
+    --debian-installer live \
     --security false \
     "${@}"

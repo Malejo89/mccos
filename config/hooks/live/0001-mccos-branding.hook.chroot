@@ -1,0 +1,102 @@
+#!/bin/sh
+
+set -e
+
+echo "Applying MCC OS branding..."
+
+# Customize /etc/os-release
+cat <<'EOF' > /etc/os-release
+NAME="MCC OS"
+VERSION="0.1.0-dev (Developer Edition)"
+ID=mccos
+ID_LIKE=debian
+PRETTY_NAME="MCC OS 0.1.0-dev (ARM64)"
+VERSION_ID="0.1.0"
+HOME_URL="https://github.com/Malejo89/mccos"
+SUPPORT_URL="https://github.com/Malejo89/mccos/issues"
+BUG_REPORT_URL="https://github.com/Malejo89/mccos/issues"
+EOF
+
+# Customize /etc/issue and /etc/issue.net
+cat <<'EOF' > /etc/issue
+MCC OS 0.1.0-dev \n \l
+
+EOF
+
+cat <<'EOF' > /etc/issue.net
+MCC OS 0.1.0-dev
+EOF
+
+# Customize /etc/lsb-release
+cat <<'EOF' > /etc/lsb-release
+DISTRIB_ID=MCCOS
+DISTRIB_RELEASE=0.1.0
+DISTRIB_CODENAME=developer
+DISTRIB_DESCRIPTION="MCC OS 0.1.0-dev"
+EOF
+
+# Customize /etc/default/grub distributor
+if [ -f /etc/default/grub ]; then
+    sed -i 's/^GRUB_DISTRIBUTOR=.*/GRUB_DISTRIBUTOR="MCC OS"/' /etc/default/grub || true
+fi
+
+# Configure Calamares Branding
+mkdir -p /etc/calamares/branding/mccos
+cat <<'EOF' > /etc/calamares/branding/mccos/branding.desc
+---
+componentName:  mccos
+welcomeStyleCalamares: true
+welcomeExpanding: true
+
+strings:
+    productName:         MCC OS
+    shortProductName:    MCC OS
+    version:             0.1.0-dev
+    shortVersion:        0.1.0
+    versionedName:       MCC OS 0.1.0-dev
+    shortVersionedName:  MCC OS 0.1.0
+    bootloaderEntryName: MCC OS
+    productUrl:          https://github.com/Malejo89/mccos
+    supportUrl:          https://github.com/Malejo89/mccos/issues
+    knownIssuesUrl:      https://github.com/Malejo89/mccos/issues
+    releaseNotesUrl:     https://github.com/Malejo89/mccos
+
+style:
+    SidebarBackground:    "#1e1e2e"
+    SidebarText:          "#cdd6f4"
+    SidebarTextSelect:    "#89b4fa"
+EOF
+
+# Configure Calamares settings
+mkdir -p /etc/calamares
+cat <<'EOF' > /etc/calamares/settings.conf
+---
+modules-search: [ local, /usr/lib/calamares/modules ]
+
+sequence:
+  - show:
+      - welcome
+      - locale
+      - keyboard
+      - partition
+      - users
+      - summary
+  - exec:
+      - partition
+      - mount
+      - unpackfs
+      - machineid
+      - fstab
+      - locale
+      - keyboard
+      - localecfg
+      - users
+      - networkcfg
+      - displaymanager
+      - umount
+  - show:
+      - finished
+
+branding: mccos
+prompt-final-user-deletion: false
+EOF

@@ -1,0 +1,39 @@
+#!/bin/sh
+
+set -e
+
+echo "Configuring default user 'mcc' and SDDM autologin..."
+
+# Create default system user 'mcc' (password: mcc)
+useradd -m -s /bin/bash mcc 2>/dev/null || true
+useradd -m -s /bin/bash user 2>/dev/null || true
+
+usermod -aG sudo,docker,video,audio,input,storage mcc 2>/dev/null || true
+usermod -aG sudo,docker,video,audio,input,storage user 2>/dev/null || true
+
+echo "mcc:mcc" | chpasswd 2>/dev/null || true
+echo "user:mcc" | chpasswd 2>/dev/null || true
+echo "root:mcc" | chpasswd 2>/dev/null || true
+
+# Configure sudoers for passwordless sudo
+mkdir -p /etc/sudoers.d
+cat <<'EOF' > /etc/sudoers.d/mccos-users
+mcc ALL=(ALL:ALL) NOPASSWD: ALL
+user ALL=(ALL:ALL) NOPASSWD: ALL
+EOF
+chmod 0440 /etc/sudoers.d/mccos-users
+
+# Configure SDDM auto-login for default user 'mcc'
+mkdir -p /etc/sddm.conf.d
+cat <<'EOF' > /etc/sddm.conf.d/autologin.conf
+[Autologin]
+User=mcc
+Session=plasmax11.desktop
+Relogin=false
+
+[Theme]
+Current=breeze
+
+[General]
+InputMethod=
+EOF
